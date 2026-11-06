@@ -1,0 +1,7 @@
+[build]
+target = "x86_64-unknown-uefi"
+
+# rustc defaults to efi_application, which the firmware unloads as soon as main returns, and
+# systemd-boot refuses drivers whose code is not in boot services memory.
+[target.x86_64-unknown-uefi]
+rustflags = [ "-C", "link-arg=/subsystem:efi_boot_service_driver" ]
